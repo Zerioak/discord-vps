@@ -991,9 +991,6 @@ async def create_vps_command(ctx, memory: int, cpu: int, disk: int, owner: disco
                     detach=True,
                     privileged=True,
                     hostname=f"unixnodes-{vps_id}",
-                    mem_limit=memory_bytes,
-                    cpu_period=100000,
-                    cpu_quota=int(cpu * 100000),
                     cap_add=["ALL"],
                     network=DOCKER_NETWORK,
                     volumes={
@@ -2653,4 +2650,5 @@ if __name__ == "__main__":
         bot.run(TOKEN)
     except Exception as e:
         logger.error(f"Bot crashed: {e}")
+
         traceback.print_exc()
