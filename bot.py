@@ -49,8 +49,8 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 ADMIN_IDS = {int(id_) for id_ in os.getenv('ADMIN_IDS', '1210291131301101618').split(',') if id_.strip()}
 ADMIN_ROLE_ID = int(os.getenv('ADMIN_ROLE_ID', '1376177459870961694'))
-WATERMARK = "UnixNodes VPS Service"
-WELCOME_MESSAGE = "Welcome To UnixNodes! Get Started With Us!"
+WATERMARK = "UnixNodes IdkSMP Services"
+WELCOME_MESSAGE = "Welcome To IdkNODES Get Started With Us!"
 MAX_VPS_PER_USER = int(os.getenv('MAX_VPS_PER_USER', '3'))
 DEFAULT_OS_IMAGE = os.getenv('DEFAULT_OS_IMAGE', 'ubuntu:22.04')
 DOCKER_NETWORK = os.getenv('DOCKER_NETWORK', 'bridge')
@@ -711,9 +711,9 @@ async def setup_container(container_id, status_msg, memory, username, vps_id=Non
 
         # Set UnixNodes customization
         if isinstance(status_msg, discord.Interaction):
-            await status_msg.followup.send("🎨 Setting up UnixNodes customization...", ephemeral=True)
+            await status_msg.followup.send("🎨 Setting up IdkNodes customization...", ephemeral=True)
         else:
-            await status_msg.edit(content="🎨 Setting up UnixNodes customization...")
+            await status_msg.edit(content="🎨 Setting up IdkNodes customization...")
             
         # Create welcome message file
         welcome_cmd = f"echo '{WELCOME_MESSAGE}' > /etc/motd && echo 'echo \"{WELCOME_MESSAGE}\"' >> /home/{username}/.bashrc"
@@ -761,9 +761,9 @@ async def setup_container(container_id, status_msg, memory, username, vps_id=Non
                 logger.warning(f"Security setup command failed: {cmd} - {output}")
 
         if isinstance(status_msg, discord.Interaction):
-            await status_msg.followup.send("✅ UnixNodes VPS setup completed successfully!", ephemeral=True)
+            await status_msg.followup.send("✅ IdkNodes VPS setup completed successfully!", ephemeral=True)
         else:
-            await status_msg.edit(content="✅ UnixNodes VPS setup completed successfully!")
+            await status_msg.edit(content="✅ IdkNodes VPS setup completed successfully!")
             
         return True, ssh_password, vps_id
     except Exception as e:
@@ -809,7 +809,7 @@ async def on_ready():
 async def show_commands(ctx):
     """Show all available commands"""
     try:
-        embed = discord.Embed(title="🤖 UnixNodes VPS Bot Commands", color=discord.Color.blue())
+        embed = discord.Embed(title="🤖 IdkNodes VPS Bot Commands", color=discord.Color.blue())
         
         # User commands
         embed.add_field(name="User Commands", value="""
@@ -967,7 +967,7 @@ async def create_vps_command(ctx, memory: int, cpu: int, disk: int, owner: disco
             await ctx.send(f"❌ {owner.mention} already has the maximum number of VPS instances ({bot.db.get_setting('max_vps_per_user')})", ephemeral=True)
             return
 
-        status_msg = await ctx.send("🚀 Creating UnixNodes VPS instance... This may take a few minutes.")
+        status_msg = await ctx.send("🚀 Creating IdkNodes VPS instance... This may take a few minutes.")
 
         memory_bytes = memory * 1024 * 1024 * 1024
         vps_id = generate_vps_id()
@@ -1092,7 +1092,7 @@ async def create_vps_command(ctx, memory: int, cpu: int, disk: int, owner: disco
         bot.db.add_vps(vps_data)
         
         try:
-            embed = discord.Embed(title="🎉 UnixNodes VPS Creation Successful", color=discord.Color.green())
+            embed = discord.Embed(title="🎉 IdkNodes VPS Creation Successful", color=discord.Color.green())
             embed.add_field(name="🆔 VPS ID", value=vps_id, inline=True)
             embed.add_field(name="💾 Memory", value=f"{memory}GB", inline=True)
             embed.add_field(name="⚡ CPU", value=f"{cpu} cores", inline=True)
@@ -1106,7 +1106,7 @@ async def create_vps_command(ctx, memory: int, cpu: int, disk: int, owner: disco
             embed.add_field(name="ℹ️ Note", value="This is a UnixNodes VPS instance. You can install and configure additional packages as needed.", inline=False)
             
             await owner.send(embed=embed)
-            await status_msg.edit(content=f"✅ UnixNodes VPS creation successful! VPS has been created for {owner.mention}. Check your DMs for connection details.")
+            await status_msg.edit(content=f"✅ IdkNodes VPS creation successful! VPS has been created for {owner.mention}. Check your DMs for connection details.")
         except discord.Forbidden:
             await status_msg.edit(content=f"❌ I couldn't send a DM to {owner.mention}. Please ask them to enable DMs from server members.")
             
@@ -1131,7 +1131,7 @@ async def list_vps(ctx):
             await ctx.send("You don't have any VPS instances.", ephemeral=True)
             return
 
-        embed = discord.Embed(title="Your UnixNodes VPS Instances", color=discord.Color.blue())
+        embed = discord.Embed(title="Your IdkNodes VPS Instances", color=discord.Color.blue())
         
         for vps in user_vps:
             try:
@@ -1254,7 +1254,7 @@ async def delete_vps(ctx, vps_id: str):
         
         bot.db.remove_vps(token)
         
-        await ctx.send(f"✅ UnixNodes VPS {vps_id} has been deleted successfully!")
+        await ctx.send(f"✅ IdkNodes VPS {vps_id} has been deleted successfully!")
     except Exception as e:
         logger.error(f"Error in delete_vps: {e}")
         await ctx.send(f"❌ Error deleting VPS: {str(e)}")
@@ -2652,3 +2652,4 @@ if __name__ == "__main__":
         logger.error(f"Bot crashed: {e}")
 
         traceback.print_exc()
+
