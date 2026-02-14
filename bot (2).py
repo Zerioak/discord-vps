@@ -2050,13 +2050,13 @@ async def inv(interaction: discord.Interaction):
     points_percent = min((user_data['points'] / POINTS_PER_DEPLOY) * 100, 100)
     progress_bar = "🟩" * int(points_percent / 20) + "⬛" * (5 - int(points_percent / 20))
     
-        embed.add_field(
+    embed.add_field(
         name="📈 **Deploy Progress**",
         value=f"```\n{progress_bar} {points_percent:.1f}%\n{user_data['points']}/{POINTS_PER_DEPLOY} points\n🎯 Need {points_needed} more points\n```",
         inline=False
     )
-    
-    if user_data['inv_unclaimed'] > 0:
+
+     if user_data['inv_unclaimed'] > 0:
         embed.add_field(
             name="⚡ **Quick Action**",
             value=f"Use `/claimpoint` to convert **{user_data['inv_unclaimed']} invites** → **{user_data['inv_unclaimed']} points**!",
